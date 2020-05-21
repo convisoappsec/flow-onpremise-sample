@@ -1,0 +1,15 @@
+---
+on_premises: true
+on_premise_generate_key: CHANGE_ME
+email_notification: CHANGE_ME
+
+mailer_config:
+  user_name: default
+  password: default
+  domain: default
+  address: default
+  port: default
+
+recaptcha:
+  site_key: ''
+  secret_key: ''
