@@ -1,6 +1,6 @@
 # Flow on premise sample
 
-This is a demo project to be used as guide for new flow users or developers.
+This is a demo project to be used as guide for new flow users or developers. [See the user guide](https://conviso.pipz.help/flow-on-premise/).
 
 ### Installation
 
@@ -55,6 +55,28 @@ $ sudo docker-compose up -d
 Access the flow application at https://localhost.
 See [docker-compose] for more commands.
 
+## Development
+For developers some few steps are needed.
+Yet inside this project root dir, clone the flow source code.
+```sh
+$ git clone git@github.com:convisoappsec/csc.git
+```
+Switch to the onpremise branch.
+```sh
+$ cd csc && git checkout feature/onpremise && cd ..
+```
+Create docker-compose.override.yml from dev sample. This file will mount the flow source code folders at the docker containers from flow.
+```sh
+$ cp docker-compose.override.yml.dev docker-compose.override.yml
+```
+Build the flow images from the code.
+```sh
+$ sudo docker-compose build
+```
+From now you're ready to run the application.
+```sh
+$ sudo docker-compose up -d
+```
    [docker-compose]: <https://docs.docker.com/compose/>
    [docker]: <https://www.docker.com/>
    [convisoappsec]: <https://convisoappsec.com/>
