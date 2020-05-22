@@ -1,0 +1,24 @@
+version: '3.0'
+
+services:
+    app:
+        build: csc/
+        volumes:
+            - ./csc/app:/app/app
+            - ./csc/config:/app/config
+            - ./csc/db:/app/db
+            - ./csc/lib:/app/lib
+            - ./csc/public:/app/public
+            - ./csc/script:/app/script
+            - ./csc/spec:/app/spec
+
+    app-worker:
+        build: csc/
+        volumes:
+            - ./csc/app:/app/app
+            - ./csc/config:/app/config
+            - ./csc/db:/app/db
+            - ./csc/lib:/app/lib
+            - ./csc/public:/app/public
+            - ./csc/script:/app/script
+            - ./csc/spec:/app/spec
