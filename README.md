@@ -40,7 +40,6 @@ $ KEY="$(sudo docker run convisoappsec/flow bundle exec rake secret)"
 ```sh
 $ echo "APP_SECRET_KEY_BASE=${KEY}" >> .env
 ```
-Copy the command output and set the APP_SECRET_KEY_BASE variable.
 
 #### The app/config/on_premises.yml file
 Open the file and edit the value of on_premise_generate_key field. This value
