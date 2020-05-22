@@ -2,3 +2,4 @@
 app/config/on_premises.yml
 csc/*
 flow/*
+docker-compose.override.yml
