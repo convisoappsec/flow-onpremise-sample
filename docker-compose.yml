@@ -12,6 +12,7 @@ services:
         environment:
             RAILS_LOG_TO_STDOUT: 1
             SECRET_KEY_BASE: "${APP_SECRET_KEY_BASE}"
+            LICENSE_ON_PREMISE_GENERATE_KEY: "${LICENSE_ON_PREMISE_GENERATE_KEY}"
         volumes:
             - ./app/config/on_premises.yml:/app/config/on_premises.yml
             - app-assets:/app/public/assets
@@ -34,6 +35,7 @@ services:
             -  "app/common_configuration.env"
         environment:
             SECRET_KEY_BASE: "${APP_SECRET_KEY_BASE}"
+            LICENSE_ON_PREMISE_GENERATE_KEY: "${LICENSE_ON_PREMISE_GENERATE_KEY}"
         command: "start_sidekiq"
         volumes:
             - ./app/config/on_premises.yml:/app/config/on_premises.yml
