@@ -1,6 +1,5 @@
 ---
 on_premises: true
-on_premise_generate_key: CHANGE_ME
 email_notification: default
 
 mailer_config:
