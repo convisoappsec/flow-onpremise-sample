@@ -1,6 +1,6 @@
 # Flow on premise sample
 
-This is a demo project to be used as guide for new flow users or developers. [See the user guide](https://conviso.pipz.help/flow-on-premise/).
+This is a demo project to be used as guide for new flow users or developers.
 
 ### Installation
 
@@ -29,10 +29,9 @@ $ sudo scripts/pull_flow_images.sh access_token
 Copy the configuration sample files to be edited.
 ```sh
 $ cp .env.sample .env
-$ cp app/config/on_premises.yml.sample app/config/on_premises.yml
 ```
 #### The .env file
-Open the file, note that the variable APP_SECRET_KEY_BASE already is set, but we encourage you override it.
+Open the file, note that the variable APP_SECRET_KEY_BASE is already set, but we encourage you override it.
 Execute the following command to generate a secret.
 ```sh
 $ KEY="$(sudo docker run convisoappsec/flow bundle exec rake secret)"
@@ -40,10 +39,7 @@ $ KEY="$(sudo docker run convisoappsec/flow bundle exec rake secret)"
 ```sh
 $ echo "APP_SECRET_KEY_BASE=${KEY}" >> .env
 ```
-
-#### The app/config/on_premises.yml file
-Open the file and edit the value of on_premise_generate_key field. This value
-must be provided by [convisoappsec].
+Now the __LICENSE_ON_PREMISE_GENERATE_KEY__ variable must be set. The value from this variable is provided by [convisoappsec].
 
 ## Running the aplication
 
@@ -77,9 +73,8 @@ From now you're ready to run the application.
 ```sh
 $ sudo docker-compose up -d
 ```
-   [docker-compose]: <https://docs.docker.com/compose/>
-   [docker]: <https://www.docker.com/>
-   [convisoappsec]: <https://convisoappsec.com/>
-   [convisoappsec docker registry]:<https://136214147921.dkr.ecr.us-west-2.amazonaws.com>
-   
 
+[docker-compose]: <https://docs.docker.com/compose/>
+[docker]: <https://www.docker.com/>
+[convisoappsec]: <https://convisoappsec.com/>
+[convisoappsec docker registry]:<https://136214147921.dkr.ecr.us-west-2.amazonaws.com>
