@@ -41,6 +41,10 @@ $ echo "APP_SECRET_KEY_BASE=${KEY}" >> .env
 ```
 Now the __LICENSE_ON_PREMISE_GENERATE_KEY__ variable must be set. The value from this variable is provided by [convisoappsec].
 
+
+```sh
+$ echo "LICENSE_ON_PREMISE_GENERATE_KEY=the-gen-key-provided-by-conviso" >> .env
+```
 ## Running the aplication
 
 After follow all previous steps the flow program can be started using the
