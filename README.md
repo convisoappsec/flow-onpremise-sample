@@ -51,6 +51,17 @@ $ sudo docker-compose up -d
 Access the flow application at https://localhost.
 See [docker-compose] for more commands.
 
+## Useful commands
+To see when the magister and flow services are healthy
+```sh
+$ sudo watch docker ps
+```
+
+To display magister admin credentials to configure integration with flow
+```sh
+$ sudo docker-compose exec magister-api rake magister:admin:credentials
+```
+
 ## Development
 For developers some few steps are needed.
 Yet inside this project root dir, clone the flow source code.
