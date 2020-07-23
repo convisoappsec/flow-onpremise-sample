@@ -46,6 +46,30 @@ services:
             - db
             - redis
 
+    magister-api:
+        image: convisoappsec/magister-api
+        restart: always
+        environment:
+            RAILS_LOG_TO_STDOUT: 1
+        env_file:
+            - ./magister/config.env
+
+        volumes:
+            - "magister-api-public-system:/app/public/system"
+            - "magister-api-non-public-system:/app/non-public/system"
+            - "magister-api-log:/app/log"
+        networks:
+            - flow-onpremise-backend
+        depends_on:
+            - magister-db
+            - redis
+        healthcheck:
+            test: "curl --fail http://localhost:3000"
+            interval: 30s
+            timeout: 10s
+            retries: 10
+
+
     ###########################################################################
     # Infrastructure Services
     ###########################################################################
@@ -74,6 +98,16 @@ services:
         networks:
             - flow-onpremise-backend
 
+    magister-db:
+        image: mysql/mysql-server:5.7
+        restart: always
+        env_file:
+            -  "magister-db/config.env"
+        volumes:
+            - "magister-db-data:/var/lib/mysql"
+        networks:
+            - flow-onpremise-backend
+
     redis:
         image: 'redis:4.0-alpine'
         restart: always
@@ -83,11 +117,27 @@ services:
         volumes:
             - 'redis:/data'
 
+    minio:
+        image: minio/minio:RELEASE.2020-03-19T21-49-00Z
+        restart: always
+        command: "server /data"
+        env_file:
+            - ./minio/config.env
+        volumes:
+            - "magister-minio-data:/data"
+        networks:
+            - flow-onpremise-backend
+
 volumes:
-  app-assets:
-  app-tmp:
-  db:
-  redis:
+    app-assets:
+    app-tmp:
+    db:
+    redis:
+    magister-api-public-system:
+    magister-api-non-public-system:
+    magister-api-log:
+    magister-minio-data:
+    magister-db-data:
 
 networks:
     flow-onpremise-frontend:

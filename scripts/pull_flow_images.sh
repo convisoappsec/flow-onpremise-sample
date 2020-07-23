@@ -17,14 +17,17 @@ convisoappsec:flow:docker:pull() {
   flow_app_img="${CONVISO_DOCKER_REGISTRY}/flow-app:latest"
   flow_db_img="${CONVISO_DOCKER_REGISTRY}/flow-db:latest"
   flow_web_img="${CONVISO_DOCKER_REGISTRY}/flow-web:latest"
+  magister_api_img="${CONVISO_DOCKER_REGISTRY}/magister-api:latest"
 
   docker pull "$flow_app_img"
   docker pull "$flow_db_img"
   docker pull "$flow_web_img"
+  docker pull "$magister_api_img"
 
   docker tag "$flow_app_img" "${DOCKER_NAMESPACE}/flow"
-  docker tag "$flow_db_img"  "${DOCKER_NAMESPACE}/flow-db"
-  docker tag "$flow_web_img"  "${DOCKER_NAMESPACE}/flow-web"
+  docker tag "$flow_db_img" "${DOCKER_NAMESPACE}/flow-db"
+  docker tag "$flow_web_img" "${DOCKER_NAMESPACE}/flow-web"
+  docker tag "$magister_api_img" "${DOCKER_NAMESPACE}/magister-api"
 }
 
 convisoappsec:flow:docker:pull "${@}"
