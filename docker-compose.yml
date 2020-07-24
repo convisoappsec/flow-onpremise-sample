@@ -63,6 +63,7 @@ services:
         depends_on:
             - magister-db
             - redis
+            - minio
         healthcheck:
             test: "curl --fail http://localhost:3000"
             interval: 30s
@@ -124,7 +125,7 @@ services:
         env_file:
             - ./minio/config.env
         volumes:
-            - "magister-minio-data:/data"
+            - "minio-data:/data"
         networks:
             - flow-onpremise-backend
 
@@ -133,10 +134,10 @@ volumes:
     app-tmp:
     db:
     redis:
+    minio-data:
     magister-api-public-system:
     magister-api-non-public-system:
     magister-api-log:
-    magister-minio-data:
     magister-db-data:
 
 networks:
