@@ -13,7 +13,7 @@ Flow requires:
 
 Let's start cloning the demo project.
 ```sh
-$ git clone git@github.com:convisoappsec/flow-onpremise-sample.git flow-onpremise
+$ git clone https://github.com/convisoappsec/flow-onpremise-sample.git flow-onpremise
 ```
 Go to the demo project root folder.
 ```sh
