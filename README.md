@@ -19,8 +19,8 @@ Go to the demo project root folder.
 ```sh
 $ cd flow-onpremise
 ```
-With the access_token file provided by [convisoappsec] you're be able to pull the flow
-dependency docker images.
+With the access_token file provided by [convisoappsec] you'll be able to pull the flow
+docker images dependencies.
 ```sh
 $ chmod +x scripts/pull_flow_images.sh
 $ sudo scripts/pull_flow_images.sh access_token
@@ -45,7 +45,7 @@ Now the __LICENSE_ON_PREMISE_GENERATE_KEY__ variable must be set. The value from
 ```sh
 $ echo "LICENSE_ON_PREMISE_GENERATE_KEY=the-gen-key-provided-by-conviso" >> .env
 ```
-## Running the aplication
+## Running the application
 
 After follow all previous steps the flow program can be started using the
 docker-compose. Execute the following command.
