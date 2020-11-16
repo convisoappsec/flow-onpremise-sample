@@ -125,7 +125,7 @@ services:
         env_file:
             - ./minio/config.env
         volumes:
-            - "minio-data:/data"
+            - "minio-flow:/data/flow"
         networks:
             - flow-onpremise-backend
 
@@ -134,7 +134,7 @@ volumes:
     app-tmp:
     db:
     redis:
-    minio-data:
+    minio-flow:
     magister-api-public-system:
     magister-api-non-public-system:
     magister-api-log:
