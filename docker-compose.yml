@@ -5,20 +5,19 @@ services:
     # Flow Services
     ###########################################################################
     app:
-        image: convisoappsec/flow
+        image: docker.convisoappsec.com/flow-app:2
         restart: always
         env_file:
             -  "app/common_configuration.env"
         environment:
             RAILS_LOG_TO_STDOUT: 1
             SECRET_KEY_BASE: "${APP_SECRET_KEY_BASE}"
-            LICENSE_ON_PREMISE_GENERATE_KEY: "${LICENSE_ON_PREMISE_GENERATE_KEY}"
         volumes:
-            - ./app/config/on_premises.yml:/app/config/on_premises.yml
-            - app-assets:/app/public/assets
             - app-tmp:/app/tmp
+            - app-storage:/app/storage
         networks:
             - flow-onpremise-backend
+
         depends_on:
             - db
             - redis
@@ -29,17 +28,16 @@ services:
             retries: 10
 
     app-worker:
-        image: convisoappsec/flow
+        image: docker.convisoappsec.com/flow-app:2
         restart: always
         env_file:
             -  "app/common_configuration.env"
         environment:
             SECRET_KEY_BASE: "${APP_SECRET_KEY_BASE}"
-            LICENSE_ON_PREMISE_GENERATE_KEY: "${LICENSE_ON_PREMISE_GENERATE_KEY}"
         command: "start_sidekiq"
         volumes:
-            - ./app/config/on_premises.yml:/app/config/on_premises.yml
             - app-tmp:/app/tmp
+            - app-storage:/app/storage
         networks:
             - flow-onpremise-backend
         depends_on:
@@ -47,7 +45,7 @@ services:
             - redis
 
     magister-api:
-        image: convisoappsec/magister-api
+        image: docker.convisoappsec.com/magister-api
         restart: always
         environment:
             RAILS_LOG_TO_STDOUT: 1
@@ -75,7 +73,7 @@ services:
     # Infrastructure Services
     ###########################################################################
     web:
-        image: convisoappsec/flow-web
+        image: docker.convisoappsec.com/flow-web
         restart: always
         ports:
             - "443:443"
@@ -90,7 +88,7 @@ services:
            - app
 
     db:
-        image: convisoappsec/flow-db
+        image: docker.convisoappsec.com/mysql-server
         restart: always
         env_file:
             -  "db/config.env"
@@ -100,7 +98,7 @@ services:
             - flow-onpremise-backend
 
     magister-db:
-        image: mysql/mysql-server:5.7
+        image: docker.convisoappsec.com/mysql-server
         restart: always
         env_file:
             -  "magister-db/config.env"
@@ -110,7 +108,7 @@ services:
             - flow-onpremise-backend
 
     redis:
-        image: 'redis:4.0-alpine'
+        image: docker.convisoappsec.com/redis
         restart: always
         command: redis-server
         networks:
@@ -119,7 +117,7 @@ services:
             - 'redis:/data'
 
     minio:
-        image: minio/minio
+        image: docker.convisoappsec.com/minio
         restart: always
         command: "server /data"
         env_file:
@@ -129,15 +127,26 @@ services:
         networks:
             - flow-onpremise-backend
 
+    registry:
+        image: docker.convisoappsec.com/registry
+        restart: always
+        volumes:
+            - registry-data:/var/lib/registry
+        ports:
+            - 5000:5000
+
+
 volumes:
-    app-assets:
+    registry-data:
     app-tmp:
+    app-storage:
     db:
     redis:
     magister-api-public-system:
     magister-api-non-public-system:
     magister-api-log:
     magister-db-data:
+
 
 networks:
     flow-onpremise-frontend:
